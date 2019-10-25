@@ -1,0 +1,48 @@
+<!-- header -->
+<% include partials/header %>
+
+<!-- login form -->
+
+
+<form action="/register" method="post" class="container">
+    <h1>Register Today</h1>
+    <% if (flashMsg !== null && typeof flashMsg !== "undefined") { %>
+        <% if (status !== null) { %>
+            <% if (status === false) { %>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <%= flashMsg %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <% } else { %>
+                <div class="alert alert-success alert-dismissible fade show">
+                    <%= flashMsg %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <% } %>
+        <% } %>
+    <% } %>
+
+    <!-- form groups -->
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="form-control" id="">
+    </div>
+    <div class="form-group">
+        <label for="fullname">Full name:</label>
+        <input type="text" class="form-control" name="fullname">
+    </div>
+    <div class="form-group">
+        <label for="passcode">Passcode:</label>
+        <input type="password" name="passcode" class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Register" class="btn btn-primary">
+    </div>
+</form>
+
+<!-- footer -->
+<% include partials/footer %>

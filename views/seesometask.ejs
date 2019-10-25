@@ -1,0 +1,67 @@
+<% include partials/header-authenticated %>
+
+<h1>See task</h1>
+
+<div class="container">
+    <h1>Search Results</h1>
+    <table class="table table-striped">
+        <!-- heading section -->
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Task Name</th>
+            <th scope="col">Added At</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Delete</th>
+        </thead>
+        <!-- body section -->
+        <tbody>
+            <% for (var i = 0; i < result.length; i++) { %>
+                <!-- Those tasks have already passed -->
+                <% if (Date.now() > new Date(result[i].deadline)) { %>
+                    <tr class="over">
+                        <!-- cardinal number, order -->
+                        <th scope="row"><%= i + 1 %></th>
+                        <!-- task name -->
+                        <td><%= result[i].task %></td>
+                        <!-- added at -->
+                        <td><%= result[i].added_at %></td>
+                        <!-- due date -->
+                        <td><%= result[i].deadline %></td>
+                        <!-- status -->
+                        <td>Passed</td>
+                        <!-- comment -->
+                        <td><%= result[i].comment %></td>
+                        <!-- delete button -->
+                        <td>
+                            <a href="/delete/<%= result[i].id %>" method="delete" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <% } else { %>
+                    <!-- Those tasks are coming soon -->
+                    <tr>
+                        <!-- cardinal number, order -->
+                        <th scope="row"><%= i + 1 %></th>
+                        <!-- task name -->
+                        <td><%= result[i].task %></td>
+                        <!-- added at -->
+                        <td><%= result[i].added_at %></td>
+                        <!-- due date -->
+                        <td><%= result[i].deadline %></td>
+                        <!-- status -->
+                        <td>Coming</td>
+                        <!-- comment -->
+                        <td><%= result[i].comment %></td>
+                        <!-- delete button -->
+                        <td>
+                            <a href="/delete/<%= result[i].id %>" method="delete" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<% include partials/footer %>

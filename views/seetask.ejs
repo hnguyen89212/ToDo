@@ -1,0 +1,80 @@
+<% include partials/header-authenticated %>
+
+<div class="container">
+    <h1>Full List of Tasks</h1>
+    <table class="table table-striped">
+        <!-- heading section -->
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Task Name</th>
+            <th scope="col">Added At</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+        </thead>
+        <!-- body section -->
+        <tbody>
+            <% for (var i = 0; i < result.length; i++) { %>
+                <% if (Date.now() < new Date(result[i].deadline)) { %>
+                    <tr class="over">
+                        <!-- cardinal number, order -->
+                        <th scope="row"><%= i + 1 %></th>
+                        <!-- task name -->
+                        <td><%= result[i].task %></td>
+                        <!-- added at -->
+                        <td><%= result[i].added_at %></td>
+                        <!-- due date -->
+                        <td><%= result[i].deadline %></td>
+                        <!-- status -->
+                        <td>Coming</td>
+                        <!-- comment -->
+                        <td><%= result[i].comment %></td>
+                        <!-- delete button -->
+                        <td>
+                            <form action="/task/<%= result[i].id %>/?_method=DELETE" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                        </td>
+                        <!--update button -->
+                        <td>
+                            <form action="/task/<%= result[i].id %>/edit/?_method=GET" method="POST">
+                                <input class="btn btn-warning" type="submit" value="Update">
+                            </form>
+                        </td>
+                    </tr>
+                <% } else { %>
+                    <tr>
+                        <!-- cardinal number, order -->
+                        <th scope="row"><%= i + 1 %></th>
+                        <!-- task name -->
+                        <td><%= result[i].task %></td>
+                        <!-- added at -->
+                        <td><%= result[i].added_at %></td>
+                        <!-- due date -->
+                        <td><%= result[i].deadline %></td>
+                        <!-- status -->
+                        <td>Passed</td>
+                        <!-- comment -->
+                        <td><%= result[i].comment %></td>
+                        <!-- delete button -->
+                        <td>
+                            <form action="/task/<%= result[i].id %>/?_method=DELETE" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                        </td>
+                        <!-- update button -->
+                        <td>
+                            <form action="/task/<%= result[i].id %>/edit/?_method=GET" method="POST">
+                                <input class="btn btn-warning" type="submit" value="Update">
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<% include partials/footer %>

@@ -1,0 +1,20 @@
+<% include partials/header-authenticated %>
+
+<div class="container">
+    <!-- Greet the user -->
+    <h1>Hello <%= username %>!</h1>
+    <!-- Feedback form -->
+    <form action="/feedback" method="POST">
+        <div class="form-group">
+            <label for="feedback">Give us your precious feedback: </label>
+            <!-- Text box for feedback -->
+            <textarea class="form-control rounded-5" name="feedback" rows="5"></textarea>
+        </div>
+        <!-- Submit button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<% include partials/footer %>

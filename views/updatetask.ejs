@@ -1,0 +1,32 @@
+<% include partials/header-authenticated %>
+
+    <div class="container">
+        <h1>Update A Task</h1>
+        <form action="/task/<%= taskID %>/?_method=PUT" method="POST">
+            <!-- task name -->
+            <div class="form-group">
+                <label for="task">Task: </label>
+                <input type="text" name="task" class="form-control"
+                    value="<%= oldTask.task %>">
+            </div>
+            <!-- deadline date and time -->
+            <div class="form-group">
+                <label for="deadline">Due date: </label>
+                <input type="datetime-local" name="deadline"
+                    value="<%= deadlineString %>"
+                    class="form-control">
+            </div>
+            <!-- comment -->
+            <div class="form-group">
+                <label for="comment">Comment: </label>
+                <textarea name="comment" class="form-control" rows="3" 
+                    value=""><%= oldTask.comment %></textarea>
+            </div>
+            <!-- submit button -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update task</button>
+            </div>
+        </form>
+    </div>
+
+<% include partials/footer %>

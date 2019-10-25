@@ -1,0 +1,53 @@
+// User model
+CREATE TABLE users(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    fullname VARCHAR(100),
+    passcode VARCHAR(255) NOT NULL
+);
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20) | YES  |     | NULL    |                |
+| fullname | varchar(30) | YES  |     | NULL    |                |
+| passcode | varchar(50) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+// Task model
+CREATE TABLE tasks(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    task VARCHAR(100) NOT NULL DEFAULT "Coding",
+    added_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deadline DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    comment VARCHAR(200),
+    FOREIGN KEY(userID) REFERENCES users(id)
+);
++----------+--------------+------+-----+-------------------+----------------+
+| Field    | Type         | Null | Key | Default           | Extra          |
++----------+--------------+------+-----+-------------------+----------------+
+| id       | int(11)      | NO   | PRI | NULL              | auto_increment |
+| userID   | int(11)      | NO   | MUL | NULL              |                |
+| task     | varchar(100) | NO   |     | Coding            |                |
+| added_at | datetime     | NO   |     | CURRENT_TIMESTAMP |                |
+| deadline | datetime     | NO   |     | CURRENT_TIMESTAMP |                |
+| comment  | varchar(200) | YES  |     | NULL              |                |
++----------+--------------+------+-----+-------------------+----------------+
+
+// Feedback model
+CREATE TABLE feedbacks(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    content VARCHAR(300) NOT NULL,
+    added_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(userID) REFERENCES users(id)
+);
++----------+--------------+------+-----+-------------------+----------------+
+| Field    | Type         | Null | Key | Default           | Extra          |
++----------+--------------+------+-----+-------------------+----------------+
+| id       | int(11)      | NO   | PRI | NULL              | auto_increment |
+| userID   | int(11)      | NO   | MUL | NULL              |                |
+| content  | varchar(300) | NO   |     | NULL              |                |
+| added_at | datetime     | NO   |     | CURRENT_TIMESTAMP |                |
++----------+--------------+------+-----+-------------------+----------------+
